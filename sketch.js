@@ -1,5 +1,5 @@
 let values = [];
-let w = 5;
+let w = 0.5;
 
 let states = [];
 
@@ -10,7 +10,6 @@ function setup() {
     values[i] = random(height);
     states[i] = -1;
   }
-  // frameRate(5);
   quickSort(values, 0, values.length - 1);
 }
 
@@ -66,26 +65,24 @@ async function partition(arr, start, end) {
 }
 
 function draw() {
-  background(51);
+  background(255);
+  noStroke();
 
   for (let i = 0; i < values.length; i++) {
-    noStroke();
-    stroke(100);
     fill(255);
     if (states[i] == 0) {
-      fill(255, 0, 0);
+      fill(229, 91, 84);
     } else if (states[i] == 1) {
-      fill(0, 0, 255);
+      fill(229, 161, 0, 100);
     } else {
-      fill(255);
+      fill(0, 100);
     }
-
-    rect(i * w, height - values[i], w, values[i]);
+    circle(i * w, height - values[i], values[i] / 10);
   }
 }
 
 async function swap(arr, a, b) {
-  await sleep(20);
+  await sleep(0.1);
 
   // to swap the numbers for quick inside the array
   let temp = arr[a]; //storing 'a' in a temporary value so can use it to swap later
