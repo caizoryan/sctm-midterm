@@ -1,17 +1,6 @@
-let w;
+let w = 5;
 let cSize = window.innerWidth / 20;
 let speed = 1;
-
-if (!sessionStorage.getItem("count")) {
-  w = 5;
-} else {
-  w = sessionStorage.getItem("count");
-}
-if (!sessionStorage.getItem("speed")) {
-  speed = 5;
-} else {
-  speed = sessionStorage.getItem("speed");
-}
 
 // Quick Sort
 // --- x ---
@@ -19,16 +8,20 @@ const s1 = (p) => {
   let values = [];
 
   let states = [];
+  let img;
+  p.preload = () => {
+    img = p.loadImage("img.png");
+  };
   p.setup = () => {
     let b = document.getElementById("sketch1");
     let canvasWidth = b.clientWidth;
     let canvasHeight = b.clientHeight;
-
     p.createCanvas(canvasWidth, canvasHeight);
-    values = new Array(p.floor(p.width / w));
-    for (let i = 0; i < values.length; i++) {
-      values[i] = p.random(p.height);
-      states[i] = -1;
+    values = [];
+    img.loadPixels();
+
+    for (let i = 0; i < img.pixels.length; i++) {
+      values.push(img.pixels[i]);
     }
     quickSort(values, 0, values.length - 1);
   };
@@ -36,18 +29,12 @@ const s1 = (p) => {
   p.draw = () => {
     p.background(0, 10);
     p.noStroke();
-    for (let i = 0; i < values.length; i++) {
-      p.fill(255);
-      if (states[i] == 0) {
-        p.fill(229, 91, 84, 127);
-      } else if (states[i] == 1) {
-        p.fill(200, 100, p.map(values[i], 0, values.length, 10, 127), 127);
-      } else {
-        p.fill(255, 200);
-        // fill(0, 100);
-      }
-      p.circle(i * w, p.height - values[i], values[i] / cSize);
+    img.loadPixels();
+    for (let i = 0; i < img.pixels.length; i++) {
+      img.pixels[i] = values[i];
     }
+    p.image(img, 0, 0, p.width, p.height);
+    img.updatePixels();
   };
 
   async function quickSort(arr, start, end) {
@@ -97,34 +84,32 @@ const s2 = (p) => {
   let values = [];
 
   let states = [];
+  p.preload = () => {
+    img = p.loadImage("img.png");
+  };
   p.setup = () => {
-    let b = document.getElementById("sketch2");
+    let b = document.getElementById("sketch1");
     let canvasWidth = b.clientWidth;
     let canvasHeight = b.clientHeight;
     p.createCanvas(canvasWidth, canvasHeight);
-    values = new Array(p.floor(p.width / w));
-    for (let i = 0; i < values.length; i++) {
-      values[i] = p.random(p.height);
-      states[i] = -1;
+    values = [];
+    img.loadPixels();
+
+    for (let i = 0; i < img.pixels.length; i++) {
+      values.push(img.pixels[i]);
     }
     bubbleSort(values);
   };
 
   p.draw = () => {
-    p.background(255, 50);
+    p.background(0, 10);
     p.noStroke();
-    for (let i = 0; i < values.length; i++) {
-      p.fill(255);
-      if (states[i] == 0) {
-        p.fill(229, 91, 84, 127);
-      } else if (states[i] == 1) {
-        p.fill(200, 100, p.map(values[i], 0, values.length, 10, 127), 127);
-      } else {
-        p.fill(0);
-        // fill(0, 100);
-      }
-      p.circle(i * w, p.height - values[i], values[i] / cSize);
+    img.loadPixels();
+    for (let i = 0; i < img.pixels.length; i++) {
+      img.pixels[i] = values[i];
     }
+    p.image(img, 0, 0, p.width, p.height);
+    img.updatePixels();
   };
 
   async function bubbleSort(arr) {
