@@ -1,4 +1,5 @@
 // O(nlogn)
+// https://www.geeksforgeeks.org/merge-sort/
 
 arr = [4, 8, 7, 2, 11, 1, 3];
 console.log(mergeSort(arr));
