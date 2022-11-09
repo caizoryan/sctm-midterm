@@ -24,6 +24,7 @@ body {
 
 .menu {
   width: 15vw;
+  padding: 10px;
 }
 
 input {
@@ -33,4 +34,19 @@ input {
   height: 15px; /* Specified height */
   background: #000000; /* Grey background */
   outline: none; /* Remove outline */
+}
+
+button {
+  all: unset;
+  text-transform: lowercase;
+  border: 1px solid black;
+  padding: 5px 10px;
+  margin-top: 20px;
+  border-radius: 100px;
+}
+
+button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
 }

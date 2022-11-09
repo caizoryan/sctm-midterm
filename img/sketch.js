@@ -19,7 +19,7 @@ const s1 = (p) => {
     p.createCanvas(canvasWidth, canvasHeight);
     values = [];
     img.loadPixels();
-
+    // load the pixels to the values array
     for (let i = 0; i < img.pixels.length; i++) {
       values.push(img.pixels[i]);
     }
@@ -30,10 +30,12 @@ const s1 = (p) => {
     p.background(0, 10);
     p.noStroke();
     img.loadPixels();
+    // replace stored array pixels on to current image
     for (let i = 0; i < img.pixels.length; i++) {
       img.pixels[i] = values[i];
     }
     p.image(img, 0, 0, p.width, p.height);
+    // update
     img.updatePixels();
   };
 
